@@ -3,11 +3,10 @@
     <main>
       <section class="pricing-section">
         <div class="section-heading">
-          <p class="section-heading__eyebrow">Subscription plans</p>
-          <h1>Pick the tier that matches your release pace.</h1>
+          <h1>Choose a plan that fits your team.</h1>
           <p>
-            The featured Team plan intentionally combines global styles, scoped component
-            styles, modifier classes, custom properties, and responsive overrides.
+            Clear pricing for product teams of different sizes, from early collaboration
+            to broader rollout and governance.
           </p>
         </div>
 
@@ -88,27 +87,20 @@ const plans = [
 }
 
 .section-heading {
-  max-width: 42rem;
-  margin-bottom: 1.75rem;
-
-  &__eyebrow {
-    margin: 0 0 0.75rem;
-    color: rgba(125, 211, 252, 0.86);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
+  max-width: 50rem;
+  margin: 0 auto 2.25rem;
+  text-align: center;
 
   h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 5vw, 4.1rem);
-    line-height: 0.98;
+    font-size: clamp(2.2rem, 4vw, 3.35rem);
+    line-height: 1.02;
     letter-spacing: -0.05em;
   }
 
   p {
-    margin: 0.9rem 0 0;
+    max-width: 40rem;
+    margin: 1rem auto 0;
     color: rgba(203, 213, 225, 0.75);
     line-height: 1.7;
   }
@@ -156,6 +148,11 @@ const plans = [
 
   .section-heading h1 {
     font-size: 2.4rem;
+  }
+
+  .section-heading p {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 </style>
