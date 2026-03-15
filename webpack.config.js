@@ -5,6 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
+  const publicPath = isProduction ? '/Internship-Project-1/' : '/';
 
   return {
     entry: path.resolve(__dirname, 'src/main.js'),
@@ -12,6 +13,7 @@ module.exports = (_, argv) => {
       path: path.resolve(__dirname, 'dist'),
       filename: 'js/main.js',
       clean: true,
+      publicPath,
     },
     devtool: isProduction ? 'source-map' : 'eval-source-map',
     resolve: {

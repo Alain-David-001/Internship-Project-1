@@ -2,13 +2,13 @@
   <div class="page-shell">
     <header class="topbar">
       <div class="topbar__start">
-        <a class="topbar__brand" href="/">
+        <a class="topbar__brand" href="./">
           <span class="topbar__mark">A</span>
           <span>Align</span>
         </a>
 
         <nav class="topbar__nav" aria-label="Primary">
-          <a href="/">Overview</a>
+          <a href="./">Overview</a>
           <a href="#plans">Pricing</a>
           <a href="#reviews">Customers</a>
           <a :href="repoUrl" target="_blank" rel="noreferrer">About us</a>
