@@ -2,13 +2,13 @@
   <div class="page-shell">
     <header class="topbar">
       <div class="topbar__start">
-        <button class="topbar__brand" type="button" @click="scrollToTop">
+        <a class="topbar__brand" href="/">
           <span class="topbar__mark">A</span>
           <span>Align</span>
-        </button>
+        </a>
 
         <nav class="topbar__nav" aria-label="Primary">
-          <button type="button" @click="scrollToTop">Overview</button>
+          <a href="/">Overview</a>
           <a href="#plans">Pricing</a>
           <a href="#reviews">Customers</a>
           <a :href="repoUrl" target="_blank" rel="noreferrer">About us</a>
@@ -137,10 +137,6 @@ import sofiaWeberAvatar from '@/assets/avatars/sofia-weber.jpg';
 const billingCycle = ref('monthly');
 const repoUrl = 'https://github.com/Alain-David-001/Internship-Project-1';
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 const plans = [
   {
     name: 'Starter',
@@ -257,15 +253,10 @@ const reviews = [
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    padding: 0;
-    border: 0;
     color: rgb(248, 250, 252);
-    font: inherit;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-decoration: none;
-    background: transparent;
-    cursor: pointer;
   }
 
   &__mark {
@@ -285,16 +276,10 @@ const reviews = [
     align-items: center;
     gap: 1.6rem;
 
-    a,
-    button {
+    a {
       color: rgba(203, 213, 225, 0.78);
-      padding: 0;
-      border: 0;
-      font: inherit;
       font-weight: 500;
       text-decoration: none;
-      background: transparent;
-      cursor: pointer;
       transition: color 180ms ease;
 
       &:hover,
