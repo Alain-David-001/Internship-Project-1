@@ -11,7 +11,9 @@
         <a href="#reviews">Reviews</a>
       </nav>
 
-      <a class="topbar__cta" href="#plans">Contact sales</a>
+      <a class="topbar__cta" :href="repoUrl" target="_blank" rel="noreferrer">
+        Contact sales
+      </a>
     </header>
 
     <main>
@@ -71,7 +73,14 @@
       <section id="reviews" class="reviews-section">
         <div class="reviews-section__heading">
           <h2>Trusted by teams that need alignment across every release.</h2>
-          <a class="reviews-section__action" href="#reviews">Read more reviews</a>
+          <a
+            class="reviews-section__action reviews-section__action--desktop"
+            :href="repoUrl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read more reviews
+          </a>
         </div>
 
         <div class="reviews-grid">
@@ -96,6 +105,17 @@
             </div>
           </article>
         </div>
+
+        <div class="reviews-section__footer">
+          <a
+            class="reviews-section__action reviews-section__action--mobile"
+            :href="repoUrl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read more reviews
+          </a>
+        </div>
       </section>
     </main>
   </div>
@@ -109,6 +129,7 @@ import victorMarinAvatar from '@/assets/avatars/victor-marin.jpg';
 import sofiaWeberAvatar from '@/assets/avatars/sofia-weber.jpg';
 
 const billingCycle = ref('monthly');
+const repoUrl = 'https://github.com/Alain-David-001/Internship-Project-1';
 
 const plans = [
   {
@@ -162,6 +183,7 @@ const plans = [
 const displayedPlans = computed(() =>
   plans.map((plan) => ({
     ...plan,
+    ctaUrl: repoUrl,
     price: `$${billingCycle.value === 'monthly' ? plan.monthlyPrice : plan.annualPrice}`,
     billingLabel:
       billingCycle.value === 'monthly'
@@ -344,6 +366,14 @@ const reviews = [
     transform: translateY(-1px);
     outline: none;
   }
+}
+
+.reviews-section__action--mobile {
+  display: none;
+}
+
+.reviews-section__footer {
+  display: none;
 }
 
 .billing-toggle {
@@ -558,6 +588,20 @@ const reviews = [
   .reviews-section__heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .reviews-section__action--desktop {
+    display: none;
+  }
+
+  .reviews-section__action--mobile {
+    display: inline-flex;
+  }
+
+  .reviews-section__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.35rem;
   }
 
   :deep(.pricing-grid .plan-card--featured) {

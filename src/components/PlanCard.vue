@@ -22,9 +22,14 @@
       </li>
     </ul>
 
-    <button class="plan-card__button" type="button">
+    <a
+      class="plan-card__button"
+      :href="ctaUrl"
+      target="_blank"
+      rel="noreferrer"
+    >
       {{ cta }}
-    </button>
+    </a>
   </article>
 </template>
 
@@ -41,6 +46,10 @@ const props = defineProps({
     required: true,
   },
   cta: {
+    type: String,
+    required: true,
+  },
+  ctaUrl: {
     type: String,
     required: true,
   },
@@ -208,6 +217,9 @@ const cardStyle = computed(() => {
   }
 
   &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-top: auto;
     min-height: 3.25rem;
     padding: 0.95rem 1rem;
@@ -216,6 +228,7 @@ const cardStyle = computed(() => {
     color: rgb(10, 15, 28);
     font: inherit;
     font-weight: 700;
+    text-decoration: none;
     background: rgb(var(--plan-accent));
     cursor: pointer;
     transition:
