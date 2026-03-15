@@ -262,8 +262,18 @@ const displayedPlans = computed(() =>
   box-shadow: 0 28px 70px rgba(8, 145, 178, 0.18);
 }
 
+:deep(.pricing-grid .plan-card--featured:hover) {
+  transform: translateY(-1rem) scale(1.01);
+  border-color: rgba(45, 212, 191, 0.56);
+  box-shadow: 0 34px 82px rgba(8, 145, 178, 0.24);
+}
+
 :deep(.pricing-grid .plan-card--featured .plan-card__button) {
   box-shadow: 0 16px 30px rgba(13, 148, 136, 0.24);
+}
+
+:deep(.pricing-grid .plan-card--featured:hover .plan-card__button) {
+  box-shadow: 0 18px 34px rgba(13, 148, 136, 0.28);
 }
 
 @media (max-width: 980px) {
