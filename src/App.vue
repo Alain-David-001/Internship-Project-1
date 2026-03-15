@@ -9,26 +9,39 @@
             to broader rollout and governance.
           </p>
 
-          <div class="billing-toggle" role="tablist" aria-label="Billing period">
-            <button
-              :class="['billing-toggle__option', { 'billing-toggle__option--active': billingCycle === 'monthly' }]"
-              type="button"
-              role="tab"
-              :aria-selected="billingCycle === 'monthly'"
-              @click="billingCycle = 'monthly'"
+          <div class="billing-toggle">
+            <span
+              :class="[
+                'billing-toggle__label',
+                { 'billing-toggle__label--active': billingCycle === 'monthly' },
+              ]"
             >
               Monthly
-            </button>
-            <button
-              :class="['billing-toggle__option', { 'billing-toggle__option--active': billingCycle === 'annual' }]"
-              type="button"
-              role="tab"
-              :aria-selected="billingCycle === 'annual'"
-              @click="billingCycle = 'annual'"
+            </span>
+
+            <label class="billing-toggle__switch">
+              <input
+                class="billing-toggle__input"
+                type="checkbox"
+                :checked="billingCycle === 'annual'"
+                aria-label="Toggle annual billing"
+                @change="billingCycle = $event.target.checked ? 'annual' : 'monthly'"
+              >
+              <span class="billing-toggle__track">
+                <span class="billing-toggle__thumb"></span>
+              </span>
+            </label>
+
+            <span
+              :class="[
+                'billing-toggle__label',
+                { 'billing-toggle__label--active': billingCycle === 'annual' },
+              ]"
             >
               Annual
-              <span class="billing-toggle__hint">Save 18%</span>
-            </button>
+            </span>
+
+            <span class="billing-toggle__badge">Save 18%</span>
           </div>
         </div>
 
@@ -143,51 +156,87 @@ const displayedPlans = computed(() =>
 }
 
 .billing-toggle {
-  display: inline-flex;
-  gap: 0.45rem;
+  display: flex;
+  gap: 0.8rem;
   align-items: center;
+  justify-content: center;
   margin-top: 1.6rem;
-  padding: 0.4rem;
-  border: 1px solid rgba(148, 163, 184, 0.16);
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.72);
+  flex-wrap: wrap;
 
-  &__option {
-    display: inline-flex;
-    gap: 0.55rem;
-    align-items: center;
-    min-height: 2.8rem;
-    padding: 0.75rem 1rem;
-    border: 0;
-    border-radius: 999px;
-    color: rgba(226, 232, 240, 0.78);
-    font: inherit;
+  &__label {
+    color: rgba(148, 163, 184, 0.82);
+    font-size: 1rem;
     font-weight: 600;
-    background: transparent;
-    cursor: pointer;
-    transition:
-      color 180ms ease,
-      background-color 180ms ease,
-      box-shadow 180ms ease;
-
-    &:hover,
-    &:focus-visible {
-      color: rgb(248, 250, 252);
-      outline: none;
-    }
+    transition: color 180ms ease;
 
     &--active {
       color: rgb(248, 250, 252);
-      background: rgba(30, 41, 59, 0.92);
-      box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
     }
   }
 
-  &__hint {
-    padding: 0.22rem 0.5rem;
+  &__switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__track {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 4.1rem;
+    height: 2.25rem;
+    padding: 0.24rem;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    box-shadow:
+      inset 0 0 0 1px rgba(30, 41, 59, 0.4),
+      0 8px 20px rgba(2, 6, 23, 0.16);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  &__thumb {
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgb(255, 255, 255), rgb(226, 232, 240));
+    box-shadow:
+      0 6px 18px rgba(15, 23, 42, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    transition: transform 180ms ease;
+  }
+
+  &__input:checked + &__track {
+    border-color: rgba(45, 212, 191, 0.26);
+    box-shadow:
+      inset 0 0 0 1px rgba(20, 184, 166, 0.14),
+      0 8px 20px rgba(2, 6, 23, 0.16);
+  }
+
+  &__input:checked + &__track &__thumb {
+    transform: translateX(1.95rem);
+  }
+
+  &__input:focus-visible + &__track {
+    outline: 2px solid rgba(45, 212, 191, 0.4);
+    outline-offset: 2px;
+  }
+
+  &__badge {
+    margin-left: 0.15rem;
+    padding: 0.28rem 0.58rem;
     border-radius: 999px;
     color: rgb(153, 246, 228);
     font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.01em;
     background: rgba(13, 148, 136, 0.16);
   }
@@ -243,14 +292,7 @@ const displayedPlans = computed(() =>
   }
 
   .billing-toggle {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-
-    &__option {
-      justify-content: center;
-      flex: 1 1 0;
-    }
+    gap: 0.7rem;
   }
 }
 </style>
