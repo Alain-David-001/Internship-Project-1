@@ -5,7 +5,7 @@
         <p class="plan-card__badge">{{ badge }}</p>
         <h3>{{ name }}</h3>
       </div>
-      <span class="plan-card__tier">{{ featured ? 'Recommended' : 'Flexible' }}</span>
+      <span v-if="featured" class="plan-card__tier">Recommended</span>
     </div>
 
     <div class="plan-card__price-block">
