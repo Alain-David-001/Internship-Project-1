@@ -1,6 +1,6 @@
-# Pulse Workspace Pricing Demo
+# Align Demo
 
-Small Vue 3 + Webpack + Sass frontend built for the internship task around tracing generated CSS back to source in WebStorm.
+Small `Vue 3 + Webpack + Sass` frontend built for the internship task about tracing generated CSS back to source in WebStorm.
 
 ## Setup
 
@@ -8,59 +8,37 @@ Small Vue 3 + Webpack + Sass frontend built for the internship task around traci
 npm install
 ```
 
-## Run locally
+## Run
 
 ```bash
 npm run dev
 ```
 
-The development server runs on `http://localhost:8080`.
+The dev server runs on `http://localhost:8080`.
 
-## Production build
+## Build
 
 ```bash
 npm run build
 ```
 
-## How the authored CSS is transformed
+## How Authored CSS Becomes Final Browser CSS
 
-The project uses Vue single-file components with `lang="scss"` styles plus one global Sass entry file.
+The project uses global Sass from `src/styles/main.scss` and scoped Sass inside Vue single-file components such as `src/App.vue` and `src/components/PlanCard.vue`.
 
-Build flow:
+During the build:
 
-1. `src/main.js` imports `src/styles/main.scss` and the root Vue component.
-2. `vue-loader` compiles `.vue` single-file components.
-3. `sass-loader` turns Sass syntax into standard CSS and preserves source map data.
-4. `css-loader` resolves CSS imports and continues the source map chain.
-5. `mini-css-extract-plugin` extracts the final CSS into a real file in `dist/css/`.
-6. Webpack emits matching source maps so the browser can map generated CSS back to the authored `.scss` and `.vue` style blocks.
+1. `vue-loader` compiles Vue single-file components.
+2. `sass-loader` transforms Sass into standard CSS.
+3. `css-loader` resolves the CSS and keeps the source map chain.
+4. `mini-css-extract-plugin` extracts the final generated CSS into a real file.
+5. Webpack emits source maps for the generated CSS.
 
-This setup intentionally creates generated CSS that does not map 1-to-1 with the authored files because styles come from:
+The final CSS does not correspond 1-to-1 with the original source files because it combines global Sass, scoped component styles, Sass nesting, and Vue scoped-style rewriting.
 
-- global Sass in `src/styles/main.scss`
-- scoped component styles in `src/App.vue`
-- scoped component styles in `src/components/PlanCard.vue`
-- Sass nesting
-- Vue scoped-style selector rewriting
+## Generated CSS and Source Maps
 
-## Where to find generated CSS and source maps
-
-After `npm run build`, look in:
+After running `npm run build`, the generated files are in:
 
 - `dist/css/main.css`
 - `dist/css/main.css.map`
-
-The built JavaScript is emitted to:
-
-- `dist/js/main.js`
-
-## Suggested Step 2 target
-
-The featured `Team` pricing card is the best inspection target for the follow-up report because its final appearance is influenced by:
-
-- base card styles
-- the `.plan-card--featured` modifier
-- CSS custom properties for accent colors
-- global Sass rules in `main.scss`
-- scoped rules from both `App.vue` and `PlanCard.vue`
-- hover and responsive overrides
