@@ -596,18 +596,21 @@ const reviews = [
 
 @media (max-width: 980px) {
   .topbar {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 2.2rem;
+    gap: 1rem;
 
     &__start {
-      width: 100%;
-      justify-content: space-between;
+      width: auto;
+      flex-direction: column;
+      align-items: center;
       gap: 1rem;
     }
 
     &__nav {
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
     }
   }
 
@@ -654,17 +657,6 @@ const reviews = [
   }
 
   .topbar {
-    justify-content: center;
-
-    &__start {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__nav {
-      justify-content: center;
-    }
-
     &__cta {
       width: 100%;
     }
