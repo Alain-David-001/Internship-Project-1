@@ -1,15 +1,19 @@
 <template>
   <div class="page-shell">
     <header class="topbar">
-      <a class="topbar__brand" href="#">
-        <span class="topbar__mark">A</span>
-        <span>Align Plans</span>
-      </a>
+      <div class="topbar__start">
+        <button class="topbar__brand" type="button" @click="scrollToTop">
+          <span class="topbar__mark">A</span>
+          <span>Align</span>
+        </button>
 
-      <nav class="topbar__nav" aria-label="Primary">
-        <a href="#plans">Plans</a>
-        <a href="#reviews">Reviews</a>
-      </nav>
+        <nav class="topbar__nav" aria-label="Primary">
+          <button type="button" @click="scrollToTop">Overview</button>
+          <a href="#plans">Pricing</a>
+          <a href="#reviews">Customers</a>
+          <a :href="repoUrl" target="_blank" rel="noreferrer">About us</a>
+        </nav>
+      </div>
 
       <a class="topbar__cta" :href="repoUrl" target="_blank" rel="noreferrer">
         Contact sales
@@ -133,6 +137,10 @@ import sofiaWeberAvatar from '@/assets/avatars/sofia-weber.jpg';
 const billingCycle = ref('monthly');
 const repoUrl = 'https://github.com/Alain-David-001/Internship-Project-1';
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 const plans = [
   {
     name: 'Starter',
@@ -238,14 +246,26 @@ const reviews = [
   gap: 1rem;
   margin-bottom: 3rem;
 
+  &__start {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.25rem;
+    min-width: 0;
+  }
+
   &__brand {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
+    padding: 0;
+    border: 0;
     color: rgb(248, 250, 252);
+    font: inherit;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-decoration: none;
+    background: transparent;
+    cursor: pointer;
   }
 
   &__mark {
@@ -263,12 +283,18 @@ const reviews = [
   &__nav {
     display: inline-flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 1.6rem;
 
-    a {
+    a,
+    button {
       color: rgba(203, 213, 225, 0.78);
+      padding: 0;
+      border: 0;
+      font: inherit;
       font-weight: 500;
       text-decoration: none;
+      background: transparent;
+      cursor: pointer;
       transition: color 180ms ease;
 
       &:hover,
@@ -573,10 +599,15 @@ const reviews = [
     flex-wrap: wrap;
     margin-bottom: 2.2rem;
 
-    &__nav {
-      order: 3;
+    &__start {
       width: 100%;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    &__nav {
+      flex-wrap: wrap;
+      justify-content: flex-start;
     }
   }
 
@@ -624,6 +655,15 @@ const reviews = [
 
   .topbar {
     justify-content: center;
+
+    &__start {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__nav {
+      justify-content: center;
+    }
 
     &__cta {
       width: 100%;
