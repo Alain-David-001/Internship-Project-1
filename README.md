@@ -22,6 +22,12 @@ The dev server runs on `http://localhost:8080`.
 npm run build
 ```
 
+## Live Demo
+
+The project is also available on GitHub Pages:
+
+- `https://alain-david-001.github.io/Internship-Project-1/`
+
 ## How Authored CSS Becomes Final Browser CSS
 
 The project uses global Sass from `src/styles/main.scss` and scoped Sass inside Vue single-file components such as `src/App.vue` and `src/components/PlanCard.vue`.
