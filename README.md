@@ -30,17 +30,19 @@ The project is also available on GitHub Pages:
 
 ## How Authored CSS Becomes Final Browser CSS
 
-The project uses global Sass from `src/styles/main.scss` and scoped Sass inside Vue single-file components such as `src/App.vue` and `src/components/PlanCard.vue`.
+The project uses global SCSS from `src/styles/main.scss` and scoped SCSS inside Vue single-file components such as `src/App.vue` and `src/components/PlanCard.vue`.
 
 During the build:
 
-1. `vue-loader` compiles Vue single-file components.
-2. `sass-loader` transforms Sass into standard CSS.
-3. `css-loader` resolves the CSS and keeps the source map chain.
-4. `mini-css-extract-plugin` extracts the final generated CSS into a real file.
-5. Webpack emits source maps for the generated CSS.
+1. Webpack starts from `src/main.js`, which imports both the Vue app and the global SCSS file.
+2. When Webpack encounters a `.vue` file, `vue-loader` parses the single-file component and extracts its `<style lang="scss">` blocks.
+3. `sass-loader` compiles those SCSS styles into standard CSS.
+4. For scoped component styles, Vue then rewrites the selectors with generated `[data-v-...]` attributes so they apply only to that component.
+5. `css-loader` processes the resulting CSS and preserves the source-map chain.
+6. `mini-css-extract-plugin` writes the combined stylesheet to `dist/css/main.css`.
+7. With Webpack `devtool: "source-map"`, Webpack also emits `dist/css/main.css.map`.
 
-The final CSS does not correspond 1-to-1 with the original source files because it combines global Sass, scoped component styles, Sass nesting, and Vue scoped-style rewriting.
+The final CSS does not correspond 1-to-1 with the original source files because it combines global and component styles, transforms SCSS into CSS, and rewrites scoped selectors before the browser loads the generated stylesheet.
 
 ## Generated CSS and Source Maps
 
