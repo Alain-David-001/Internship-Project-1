@@ -53,6 +53,13 @@ module.exports = (_, argv) => {
             },
           ],
         },
+        {
+          test: /\.(png|jpe?g|gif|svg|webp)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/[name][ext]',
+          },
+        },
       ],
     },
     plugins: [

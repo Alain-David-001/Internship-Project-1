@@ -1,7 +1,21 @@
 <template>
   <div class="page-shell">
+    <header class="topbar">
+      <a class="topbar__brand" href="#">
+        <span class="topbar__mark">A</span>
+        <span>Align Plans</span>
+      </a>
+
+      <nav class="topbar__nav" aria-label="Primary">
+        <a href="#plans">Plans</a>
+        <a href="#reviews">Reviews</a>
+      </nav>
+
+      <a class="topbar__cta" href="#plans">Contact sales</a>
+    </header>
+
     <main>
-      <section class="pricing-section">
+      <section id="plans" class="pricing-section">
         <div class="section-heading">
           <h1>Choose a plan that fits your team.</h1>
           <p>
@@ -53,6 +67,36 @@
           />
         </div>
       </section>
+
+      <section id="reviews" class="reviews-section">
+        <div class="reviews-section__heading">
+          <h2>Trusted by teams that need alignment across every release.</h2>
+          <a class="reviews-section__action" href="#reviews">Read more reviews</a>
+        </div>
+
+        <div class="reviews-grid">
+          <article
+            v-for="review in reviews"
+            :key="review.name"
+            class="review-card"
+          >
+            <p class="review-card__quote">"{{ review.quote }}"</p>
+            <div class="review-card__meta">
+              <div class="review-card__person">
+                <img
+                  class="review-card__avatar"
+                  :src="review.avatar"
+                  alt=""
+                >
+                <div>
+                  <strong>{{ review.name }}</strong>
+                  <span>{{ review.role }}</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
   </div>
 </template>
@@ -60,6 +104,9 @@
 <script setup>
 import { computed, ref } from 'vue';
 import PlanCard from '@/components/PlanCard.vue';
+import martaLeonAvatar from '@/assets/avatars/marta-leon.jpg';
+import victorMarinAvatar from '@/assets/avatars/victor-marin.jpg';
+import sofiaWeberAvatar from '@/assets/avatars/sofia-weber.jpg';
 
 const billingCycle = ref('monthly');
 
@@ -122,6 +169,30 @@ const displayedPlans = computed(() =>
         : 'per seat / month, billed annually',
   })),
 );
+
+const reviews = [
+  {
+    name: 'Marta Leon',
+    avatar: martaLeonAvatar,
+    role: 'Product Lead at Northline Studio',
+    quote:
+      'Align gave our team a cleaner way to track priorities across design and engineering without adding process overhead.',
+  },
+  {
+    name: 'Victor Marin',
+    avatar: victorMarinAvatar,
+    role: 'Engineering Manager at Relay Works',
+    quote:
+      'The Team plan made handoff reviews much easier to follow, especially once we started sharing roadmap themes between squads.',
+  },
+  {
+    name: 'Sofia Weber',
+    avatar: sofiaWeberAvatar,
+    role: 'Operations Director at Current Labs',
+    quote:
+      'We finally had one place where planning updates, approvals, and delivery notes stayed aligned without constant follow-up.',
+  },
+];
 </script>
 
 <style scoped lang="scss">
@@ -131,8 +202,87 @@ const displayedPlans = computed(() =>
   padding: 2.5rem 0 4rem;
 }
 
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: rgb(248, 250, 252);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  &__mark {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.7rem;
+    color: rgb(153, 246, 228);
+    font-size: 0.92rem;
+    background: rgba(13, 148, 136, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.16);
+  }
+
+  &__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.4rem;
+
+    a {
+      color: rgba(203, 213, 225, 0.78);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 180ms ease;
+
+      &:hover,
+      &:focus-visible {
+        color: rgb(248, 250, 252);
+        outline: none;
+      }
+    }
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.7rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 999px;
+    color: rgb(248, 250, 252);
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(15, 23, 42, 0.78);
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba(45, 212, 191, 0.28);
+      background: rgba(30, 41, 59, 0.92);
+      transform: translateY(-1px);
+      outline: none;
+    }
+  }
+}
+
 .pricing-section {
   margin-top: 0;
+}
+
+.reviews-section {
+  margin-top: 3rem;
 }
 
 .section-heading {
@@ -152,6 +302,47 @@ const displayedPlans = computed(() =>
     margin: 1rem auto 0;
     color: rgba(203, 213, 225, 0.75);
     line-height: 1.7;
+  }
+}
+
+.reviews-section__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    letter-spacing: -0.04em;
+  }
+}
+
+.reviews-section__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 999px;
+  color: rgb(248, 250, 252);
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.72);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba(45, 212, 191, 0.28);
+    background: rgba(30, 41, 59, 0.92);
+    transform: translateY(-1px);
+    outline: none;
   }
 }
 
@@ -249,6 +440,70 @@ const displayedPlans = computed(() =>
   align-items: stretch;
 }
 
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 1.3rem;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.72);
+
+  &__quote {
+    margin: 0;
+    color: rgb(226, 232, 240);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  &__person {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  &__avatar {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 999px;
+    object-fit: cover;
+    box-shadow:
+      0 8px 18px rgba(2, 6, 23, 0.24),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    font-size: 0.98rem;
+  }
+
+  span {
+    margin-top: 0.25rem;
+    color: rgba(203, 213, 225, 0.7);
+    font-size: 0.9rem;
+  }
+}
+
 :deep(.pricing-grid .plan-card) {
   backdrop-filter: blur(18px);
 }
@@ -277,8 +532,32 @@ const displayedPlans = computed(() =>
 }
 
 @media (max-width: 980px) {
+  .topbar {
+    flex-wrap: wrap;
+    margin-bottom: 2.2rem;
+
+    &__nav {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
   .pricing-grid {
     grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-card__meta {
+    align-items: flex-start;
+  }
+
+  .reviews-section__heading {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   :deep(.pricing-grid .plan-card--featured) {
@@ -290,6 +569,14 @@ const displayedPlans = computed(() =>
   .page-shell {
     width: min(100% - 1rem, 100%);
     padding-top: 1rem;
+  }
+
+  .topbar {
+    justify-content: center;
+
+    &__cta {
+      width: 100%;
+    }
   }
 
   .section-heading h1 {
