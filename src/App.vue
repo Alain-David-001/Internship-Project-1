@@ -17,106 +17,108 @@
     </header>
 
     <main>
-      <section id="plans" class="pricing-section">
-        <div class="section-heading">
-          <h1>Choose a plan that fits your team.</h1>
-          <p>
-            Clear pricing for product teams of different sizes, from early collaboration
-            to broader rollout and governance.
-          </p>
+      <div class="content-shell">
+        <section id="plans" class="pricing-section">
+          <div class="section-heading">
+            <h1>Choose a plan that fits your team.</h1>
+            <p>
+              Clear pricing for product teams of different sizes, from early collaboration
+              to broader rollout and governance.
+            </p>
 
-          <div class="billing-toggle">
-            <span
-              :class="[
-                'billing-toggle__label',
-                { 'billing-toggle__label--active': billingCycle === 'monthly' },
-              ]"
-            >
-              Monthly
-            </span>
-
-            <label class="billing-toggle__switch">
-              <input
-                class="billing-toggle__input"
-                type="checkbox"
-                :checked="billingCycle === 'annual'"
-                aria-label="Toggle annual billing"
-                @change="billingCycle = $event.target.checked ? 'annual' : 'monthly'"
+            <div class="billing-toggle">
+              <span
+                :class="[
+                  'billing-toggle__label',
+                  { 'billing-toggle__label--active': billingCycle === 'monthly' },
+                ]"
               >
-              <span class="billing-toggle__track">
-                <span class="billing-toggle__thumb"></span>
+                Monthly
               </span>
-            </label>
 
-            <span
-              :class="[
-                'billing-toggle__label',
-                { 'billing-toggle__label--active': billingCycle === 'annual' },
-              ]"
-            >
-              Annual
-            </span>
-
-            <span class="billing-toggle__badge">Save 18%</span>
-          </div>
-        </div>
-
-        <div class="pricing-grid">
-          <PlanCard
-            v-for="plan in displayedPlans"
-            :key="plan.name"
-            v-bind="plan"
-          />
-        </div>
-      </section>
-
-      <section id="reviews" class="reviews-section">
-        <div class="reviews-section__heading">
-          <h2>Trusted by teams that need alignment across every release.</h2>
-          <a
-            class="reviews-section__action reviews-section__action--desktop"
-            :href="repoUrl"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read more reviews
-          </a>
-        </div>
-
-        <div class="reviews-grid">
-          <article
-            v-for="review in reviews"
-            :key="review.name"
-            class="review-card"
-          >
-            <p class="review-card__quote">"{{ review.quote }}"</p>
-            <div class="review-card__meta">
-              <div class="review-card__person">
-                <img
-                  class="review-card__avatar"
-                  :src="review.avatar"
-                  alt=""
+              <label class="billing-toggle__switch">
+                <input
+                  class="billing-toggle__input"
+                  type="checkbox"
+                  :checked="billingCycle === 'annual'"
+                  aria-label="Toggle annual billing"
+                  @change="billingCycle = $event.target.checked ? 'annual' : 'monthly'"
                 >
-                <div>
-                  <strong>{{ review.name }}</strong>
-                  <span>{{ review.role }}</span>
+                <span class="billing-toggle__track">
+                  <span class="billing-toggle__thumb"></span>
+                </span>
+              </label>
+
+              <span
+                :class="[
+                  'billing-toggle__label',
+                  { 'billing-toggle__label--active': billingCycle === 'annual' },
+                ]"
+              >
+                Annual
+              </span>
+
+              <span class="billing-toggle__badge">Save 18%</span>
+            </div>
+          </div>
+
+          <div class="pricing-grid">
+            <PlanCard
+              v-for="plan in displayedPlans"
+              :key="plan.name"
+              v-bind="plan"
+            />
+          </div>
+        </section>
+
+        <section id="reviews" class="reviews-section">
+          <div class="reviews-section__heading">
+            <h2>Trusted by teams that need alignment across every release.</h2>
+            <a
+              class="reviews-section__action reviews-section__action--desktop"
+              :href="repoUrl"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read more reviews
+            </a>
+          </div>
+
+          <div class="reviews-grid">
+            <article
+              v-for="review in reviews"
+              :key="review.name"
+              class="review-card"
+            >
+              <p class="review-card__quote">"{{ review.quote }}"</p>
+              <div class="review-card__meta">
+                <div class="review-card__person">
+                  <img
+                    class="review-card__avatar"
+                    :src="review.avatar"
+                    alt=""
+                  >
+                  <div>
+                    <strong>{{ review.name }}</strong>
+                    <span>{{ review.role }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        </div>
+            </article>
+          </div>
 
-        <div class="reviews-section__footer">
-          <a
-            class="reviews-section__action reviews-section__action--mobile"
-            :href="repoUrl"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read more reviews
-          </a>
-        </div>
-      </section>
+          <div class="reviews-section__footer">
+            <a
+              class="reviews-section__action reviews-section__action--mobile"
+              :href="repoUrl"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read more reviews
+            </a>
+          </div>
+        </section>
+      </div>
     </main>
   </div>
 </template>
@@ -219,9 +221,14 @@ const reviews = [
 
 <style scoped lang="scss">
 .page-shell {
-  width: min(1180px, calc(100% - 2rem));
+  width: min(1360px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 2.5rem 0 4rem;
+}
+
+.content-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
 }
 
 .topbar {
